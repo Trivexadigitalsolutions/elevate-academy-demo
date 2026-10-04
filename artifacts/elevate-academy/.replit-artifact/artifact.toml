@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Elevate Academy"
+description = "A polished, responsive concept website for a fictional premium coaching institute, with course discovery, learning philosophy, progress approach, and a non-persistent demo enquiry form."
+version = "1.0.0"
+id = "artifacts/elevate-academy"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24053
+
+[services.development]
+run = "pnpm --filter @workspace/elevate-academy run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/elevate-academy", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/elevate-academy/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24053"
+BASE_PATH = "/"
